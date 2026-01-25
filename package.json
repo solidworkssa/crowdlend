@@ -1,0 +1,21 @@
+{
+  "name": "crowdlend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Decentralized micro-lending platform",
+  "keywords": ["defi", "web3", "base", "stacks", "blockchain"],
+  "author": "solidworkssa",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "lint": "pnpm --filter web lint",
+    "test:base": "cd contracts/base && forge test",
+    "test:stacks": "cd contracts/stacks && clarinet test"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
