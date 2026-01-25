@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-black;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 border-2 border-black hover:bg-black hover:text-white transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-black text-white hover:bg-white hover:text-black;
+  }
+  
+  .card {
+    @apply border-2 border-black p-6;
+  }
+  
+  .input {
+    @apply border-2 border-black px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-black;
+  }
+}
