@@ -1,0 +1,12 @@
+[project]
+name = "crowdlend"
+description = "Decentralized micro-lending platform"
+authors = ["solidworkssa"]
+telemetry = false
+cache_dir = ".cache"
+
+[contracts.crowdlend]
+path = "contracts/crowdlend.clar"
+
+[repl.analysis]
+passes = ["check_checker"]
