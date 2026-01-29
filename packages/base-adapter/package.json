@@ -2,5 +2,9 @@
   "name": "@crowdlend/base-adapter",
   "version": "1.0.0",
   "private": true,
-  "main": "./index.ts"
+  "main": "./index.ts",
+  "dependencies": {
+    "ethers": "^6.11.1",
+    "viem": "^2.7.15"
+  }
 }
