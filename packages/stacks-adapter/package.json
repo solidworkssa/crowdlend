@@ -2,5 +2,11 @@
   "name": "@crowdlend/stacks-adapter",
   "version": "1.0.0",
   "private": true,
-  "main": "./index.ts"
+  "main": "./index.ts",
+  "dependencies": {
+    "@stacks/connect": "^7.5.0",
+    "@stacks/network": "^6.11.0",
+    "@stacks/transactions": "^6.13.0",
+    "@stacks/common": "^6.11.0"
+  }
 }
