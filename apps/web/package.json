@@ -12,18 +12,28 @@
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ethers": "^6.9.0",
-    "@stacks/connect": "^7.0.0",
-    "@stacks/transactions": "^6.9.0",
-    "@reown/appkit": "^1.0.0"
+    "ethers": "^6.11.1",
+    "@stacks/connect": "^7.5.0",
+    "@stacks/network": "^6.11.0",
+    "@stacks/transactions": "^6.13.0",
+    "@stacks/common": "^6.11.0",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.344.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.1",
+    "viem": "^2.7.15",
+    "@tanstack/react-query": "^5.24.1",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.0",
-    "tailwindcss": "^3.4.0",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32"
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.0"
   }
 }
