@@ -1,51 +1,50 @@
-;; CrowdLend - Micro-lending platform
+;; CrowdLend Clarity Contract
+;; Peer-to-peer micro-lending platform.
 
-(define-data-var loan-counter uint u0)
 
-(define-map loans uint {
-    lender: principal,
-    borrower: (optional principal),
-    amount: uint,
-    interest-rate: uint,
-    duration: uint,
-    active: bool,
-    repaid: bool
-})
+(define-map loans
+    uint
+    {
+        borrower: principal,
+        amount: uint,
+        interest: uint,
+        deadline: uint,
+        repaid: bool,
+        lender: (optional principal)
+    }
+)
+(define-data-var loan-nonce uint u0)
 
-(define-constant ERR-UNAUTHORIZED (err u101))
-(define-constant ERR-NOT-AVAILABLE (err u102))
-
-(define-public (create-loan (amount uint) (interest-rate uint) (duration uint))
-    (let ((loan-id (var-get loan-counter)))
-        (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
-        (map-set loans loan-id {
-            lender: tx-sender,
-            borrower: none,
+(define-public (request-loan (amount uint) (interest uint) (duration uint))
+    (let ((id (var-get loan-nonce)))
+        (map-set loans id {
+            borrower: tx-sender,
             amount: amount,
-            interest-rate: interest-rate,
-            duration: duration,
-            active: false,
-            repaid: false
+            interest: interest,
+            deadline: (+ block-height duration),
+            repaid: false,
+            lender: none
         })
-        (var-set loan-counter (+ loan-id u1))
-        (ok loan-id)))
+        (var-set loan-nonce (+ id u1))
+        (ok id)
+    )
+)
 
-(define-public (request-loan (loan-id uint))
-    (let ((loan (unwrap! (map-get? loans loan-id) ERR-NOT-AVAILABLE)))
-        (asserts! (is-none (get borrower loan)) ERR-NOT-AVAILABLE)
-        (map-set loans loan-id (merge loan {borrower: (some tx-sender), active: true}))
-        (try! (as-contract (stx-transfer? (get amount loan) tx-sender tx-sender)))
-        (ok true)))
+(define-public (fund-loan (id uint))
+    (let ((l (unwrap! (map-get? loans id) (err u404))))
+        (asserts! (is-none (get lender l)) (err u403))
+        (try! (stx-transfer? (get amount l) tx-sender (get borrower l)))
+        (map-set loans id (merge l {lender: (some tx-sender)}))
+        (ok true)
+    )
+)
 
-(define-public (repay-loan (loan-id uint))
-    (let (
-        (loan (unwrap! (map-get? loans loan-id) ERR-NOT-AVAILABLE))
-        (interest (/ (* (get amount loan) (get interest-rate loan)) u10000))
-        (total (+ (get amount loan) interest)))
-        (asserts! (is-eq (some tx-sender) (get borrower loan)) ERR-UNAUTHORIZED)
-        (try! (stx-transfer? total tx-sender (get lender loan)))
-        (map-set loans loan-id (merge loan {repaid: true, active: false}))
-        (ok total)))
+(define-public (repay-loan (id uint))
+    (let ((l (unwrap! (map-get? loans id) (err u404))))
+        (asserts! (not (get repaid l)) (err u403))
+        (try! (stx-transfer? (+ (get amount l) (get interest l)) tx-sender (unwrap! (get lender l) (err u404))))
+        (map-set loans id (merge l {repaid: true}))
+        (ok true)
+    )
+)
 
-(define-read-only (get-loan (loan-id uint))
-    (ok (map-get? loans loan-id)))
