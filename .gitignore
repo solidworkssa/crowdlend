@@ -60,3 +60,12 @@ init-*.sh
 test-*.sh
 check-*.sh
 publish-*.sh
+
+# Clarinet generated
+contracts/stacks/settings/
+contracts/stacks/deployments/
+
+# Local scripts
+_run_fixes.py
+*.sh
+interact-all.js
