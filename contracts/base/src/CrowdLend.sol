@@ -2,8 +2,11 @@
 pragma solidity ^0.8.20;
 
 /// @title CrowdLend Contract
+/// @author solidworkssa
 /// @notice Peer-to-peer micro-lending platform.
 contract CrowdLend {
+    string public constant VERSION = "1.0.0";
+
 
     struct Loan {
         address borrower;
