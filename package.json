@@ -2,9 +2,14 @@
   "name": "crowdlend",
   "version": "1.0.0",
   "private": true,
-  "description": "Decentralized micro-lending platform",
-  "keywords": ["defi", "web3", "base", "stacks", "blockchain"],
-  "author": "solidworkssa",
+  "description": "Peer-to-peer micro-lending protocol",
+  "keywords": [
+    "lending",
+    "defi",
+    "p2p",
+    "microfinance"
+  ],
+  "author": "solidworkssa <solidworkssa@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "pnpm --filter web dev",
@@ -17,5 +22,13 @@
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solidworkssa/crowdlend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solidworkssa/crowdlend/issues"
+  },
+  "homepage": "https://github.com/solidworkssa/crowdlend#readme"
 }
