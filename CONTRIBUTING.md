@@ -42,3 +42,4 @@ We follow conventional commits:
 ## Questions?
 
 Open an issue or contact solidworkssa@gmail.com.
+
