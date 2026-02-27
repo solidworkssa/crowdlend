@@ -32,7 +32,7 @@
 (define-public (request-loan (amount uint) (interest uint) (duration uint))
     (let ((id (var-get loan-nonce)))
         (map-set loans id {
-            borrower: tx-sender,
+            borrower: contract-caller,
             amount: amount,
             interest: interest,
             deadline: (+ block-height duration),
@@ -47,8 +47,8 @@
 (define-public (fund-loan (id uint))
     (let ((l (unwrap! (map-get? loans id) (err u404))))
         (asserts! (is-none (get lender l)) (err u403))
-        (try! (stx-transfer? (get amount l) tx-sender (get borrower l)))
-        (map-set loans id (merge l {lender: (some tx-sender)}))
+        (try! (stx-transfer? (get amount l) contract-caller (get borrower l)))
+        (map-set loans id (merge l {lender: (some contract-caller)}))
         (ok true)
     )
 )
@@ -56,7 +56,7 @@
 (define-public (repay-loan (id uint))
     (let ((l (unwrap! (map-get? loans id) (err u404))))
         (asserts! (not (get repaid l)) (err u403))
-        (try! (stx-transfer? (+ (get amount l) (get interest l)) tx-sender (unwrap! (get lender l) (err u404))))
+        (try! (stx-transfer? (+ (get amount l) (get interest l)) contract-caller (unwrap! (get lender l) (err u404))))
         (map-set loans id (merge l {repaid: true}))
         (ok true)
     )
