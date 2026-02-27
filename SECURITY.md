@@ -35,3 +35,4 @@ This policy covers:
 - Smart contracts in `contracts/`
 - Frontend application in `apps/web/`
 - Shared packages in `packages/`
+
