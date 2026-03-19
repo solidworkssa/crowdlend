@@ -33,6 +33,7 @@
   "homepage": "https://github.com/solidworkssa/crowdlend#readme",
   "dependencies": {
     "@winsznx/sdk": "0.1.0",
-    "@winsznx/react": "0.1.0"
+    "@winsznx/react": "0.1.0",
+    "@winsznx/lend402": "0.1.0"
   }
 }
